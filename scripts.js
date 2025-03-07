@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Form submitted:', formValues);
             
             // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
+            alert("Thank you for your message! I won't see it since the backend isn't set up! Please use the links provided on the left :)");
             
             // Clear form
             contactForm.reset();

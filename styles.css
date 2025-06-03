@@ -68,45 +68,7 @@ body {
     position: relative;
 }
 
-/* ===========================
-   NEURAL BACKGROUND SYSTEM
-   ========================== */
 
-#neural-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.7;
-}
-
-#particles-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: var(--neural-primary);
-    border-radius: 50%;
-    opacity: 0.6;
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
-}
 
 /* ===========================
    UTILITY CLASSES
@@ -229,6 +191,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 10px 15px 10px 0; /* Added padding for better spacing */
 }
 
 .brand-text {
@@ -382,42 +345,22 @@ body {
 }
 
 .hero-main {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: 40px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 120%;
-    max-width: 1500px;
-    overflow: visible; /* Allow neural network to extend beyond grid bounds */
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .hero-content {
     animation: fadeInUp 1s ease-out;
-    text-align: left;
+    text-align: center;
 }
 
-/* Neural Network Container - Right Side */
-.neural-network-container {
-    width: 140%;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding-right: 100px; /* Extra space on right for golden node expansion */
-    padding-left: 10px; /* Extra space on right for golden node expansion */
-    overflow: visible; /* Allow expansion beyond container */
-}
 
-.horizontal-neural-network {
-    position: relative;
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
-    border-radius: 20px;
-    overflow: visible; /* Allow golden node to expand beyond container */
-    margin-left: 50px; /* Push the entire network to the right */
-}
 
 .hero-badge {
     display: inline-flex;
@@ -445,6 +388,12 @@ body {
     line-height: 1.1;
     margin-bottom: 16px;
     position: relative;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%; /* Ensure full width for proper centering */
+    text-align: center; /* Additional centering insurance */
 }
 
 .title-main {
@@ -457,6 +406,9 @@ body {
 .title-cursor {
     color: var(--neural-accent);
     animation: blink 1s infinite;
+    margin-left: 4px;
+    display: inline-block;
+    flex-shrink: 0;
 }
 
 @keyframes blink {
@@ -465,10 +417,17 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 24px;
+    font-size: 22px;
     color: var(--neural-text-secondary);
     margin-bottom: 24px;
     font-weight: 400;
+    min-height: 1.5em; /* Prevent layout shift during typing */
+    text-align: center; /* Simple centering instead of flexbox */
+    width: 100%; /* Ensure full width */
+    max-width: 800px; /* Fixed max width to prevent reflow */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; /* Create positioning context */
 }
 
 .hero-description {
@@ -505,85 +464,16 @@ body {
     margin-top: 4px;
 }
 
-#horizontal-neural-canvas {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
 
-.neural-tooltip {
-    position: fixed;
-    background: rgba(0, 0, 0, 0.95);
-    color: var(--neural-primary);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    border: 1px solid var(--neural-primary);
-    backdrop-filter: blur(10px);
-    z-index: 10000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 212, 255, 0.3);
-    white-space: nowrap;
-    max-width: 250px;
-    text-align: center;
-    transform: translate(-50%, -100%);
-    margin-top: -10px;
-}
 
 .hero-cta {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-}
-
-.hero-visual {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    position: relative;
 }
 
-.neural-network {
-    width: 500px;
-    height: 100px;
-    position: relative;
-    background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1), transparent);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.neural-network::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    border: 2px solid var(--neural-primary);
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: rotate 20s linear infinite;
-}
-
-.neural-network::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    height: 300px;
-    border: 1px solid var(--neural-secondary);
-    border-radius: 50%;
-    opacity: 0.2;
-    animation: rotate 30s linear infinite reverse;
-}
 
 @keyframes rotate {
     from { transform: translate(-50%, -50%) rotate(0deg); }
@@ -1523,17 +1413,78 @@ body {
    RESPONSIVE DESIGN
    ========================== */
 
+/* Medium screens - Layout is already responsive */
+@media (max-width: 1100px) {
+    .hero-main {
+        max-width: 800px;
+    }
+}
+
 @media (max-width: 768px) {
     :root {
         --section-padding: 80px 0;
     }
     
+    .nav-container {
+        padding: 0 15px; /* Reduced side padding on mobile */
+    }
+    
+    .nav-brand {
+        padding: 10px 20px 10px 0; /* Increased right padding on mobile */
+    }
+    
     .nav-links {
-        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(0, 212, 255, 0.2);
+        flex-direction: column;
+        gap: 0;
+        padding: 20px 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+    
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-link {
+        width: 100%;
+        padding: 15px 20px;
+        justify-content: flex-start;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+    }
+    
+    .nav-link:last-child {
+        border-bottom: none;
     }
     
     .nav-toggle {
         display: flex;
+        z-index: 1001;
+    }
+    
+    /* Hamburger animation */
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
     }
     
     .hero-section {
@@ -1541,13 +1492,7 @@ body {
     }
     
     .hero-main {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-    }
-    
-    .hero-content {
-        text-align: center;
+        max-width: 600px;
     }
     
     .hero-title {
@@ -1561,17 +1506,9 @@ body {
     
     .hero-cta {
         justify-content: center;
+        flex-direction: row; /* Ensure buttons stay in a row */
+        align-items: center;
         margin-bottom: 40px;
-    }
-    
-    .neural-network-container {
-        height: 350px;
-        padding-right: 80px; /* Maintain right space for golden node on mobile */
-        margin-left: 0; /* Reset left margin on mobile */
-    }
-    
-    .horizontal-neural-network {
-        margin-left: 30px; /* Reduced left margin for mobile but still pushed right */
     }
     
     .about-content {
@@ -1633,17 +1570,17 @@ body {
         padding: 0 15px;
     }
     
+    .nav-brand {
+        padding: 10px 25px 10px 0; /* Even more right padding on small mobile */
+    }
+    
     .hero-section {
         padding: 90px 0 30px 0;
     }
     
     .hero-main {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .hero-content {
-        text-align: center;
+        max-width: 100%;
+        padding: 0 10px;
     }
     
     .hero-title {
@@ -1660,7 +1597,8 @@ body {
     }
     
     .hero-cta {
-        flex-direction: column;
+        flex-direction: row; /* Keep buttons side by side */
+        justify-content: center;
         align-items: center;
         gap: 15px;
         margin-bottom: 30px;
@@ -1668,20 +1606,16 @@ body {
     
     .btn-primary,
     .btn-secondary {
-        width: 100%;
-        max-width: 250px;
+        width: auto; /* Remove fixed width */
+        max-width: 200px; /* Reduce max width */
         justify-content: center;
+        flex: 0 0 auto; /* Don't grow or shrink */
     }
-    
-    .neural-network-container {
-        height: 280px;
-        padding-right: 60px; /* Maintain space for golden node on very small screens */
-        margin-left: 0; /* Reset left margin */
-    }
-    
-    .horizontal-neural-network {
-        margin-left: 20px; /* Minimal but still shifted right for very small screens */
-    }
+}
+
+/* Extra small screens */
+@media (max-width: 320px) {
+    /* Additional styles for extra small screens if needed */
 }
 
 /* ===========================

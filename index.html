@@ -3,574 +3,1012 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akash Pawar | Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Font Awesome for icons -->
+    <title>Akash Pawar - AI Research Engineer | Neural Portfolio</title>
+    <meta name="description" content="AI/ML Research Engineer specializing in LLM Fine-tuning, Deep Learning, and Large-scale Data Analytics. Transforming Complex AI Into Elegant Solutions.">
+    
+    <!-- External Dependencies -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">AP</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="theme-toggle">
-                <i class="fas fa-moon"></i>
+    <!-- Neural Background Canvas -->
+    <canvas id="neural-bg"></canvas>
+    <div id="particles-container"></div>
+    
+    <!-- Navigation -->
+    <nav class="neural-nav" id="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-text">Akash.Neural</span>
+                <div class="brand-pulse"></div>
             </div>
-        </nav>
-    </header>
-
-    <main>
-        <section id="hero">
-            <div class="container">
-                <h1>Akash Pawar</h1>
-                <h2>Machine Learning Engineer</h2>
-                <p>Specialized in NLP, Deep Learning and Data Analysis</p>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn primary">View Projects</a>
-                    <a href="#contact" class="btn secondary">Contact Me</a>
-                </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#about" class="nav-link" data-section="about">
+                    <i class="fas fa-user"></i>
+                    <span>About</span>
+                </a>
+                <a href="#experience" class="nav-link" data-section="experience">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Experience</span>
+                </a>
+                <a href="#projects" class="nav-link" data-section="projects">
+                    <i class="fas fa-brain"></i>
+                    <span>Projects</span>
+                </a>
+                <a href="#skills" class="nav-link" data-section="skills">
+                    <i class="fas fa-cogs"></i>
+                    <span>Skills</span>
+                </a>
+                <a href="#contact" class="nav-link" data-section="contact">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
             </div>
-        </section>
-
-        <!-- Other sections will be added here -->
-
-        <section id="about">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>I am a Machine Learning Engineer with expertise in Deep Learning, NLP, and traditional Machine Learning, driven by a passion for solving complex problems with intelligent systems. I recently earned my Master’s in Machine Learning from Stevens Institute of Technology, achieving a 3.93 GPA, where I honed my skills in both theoretical foundations and real-world applications.</p>
-                        <p>I have built and optimized machine learning systems across NLP, deep learning, and computational biology, tackling challenges in text classification, retrieval-augmented generation, large-scale model fine-tuning, and predictive analytics. I thrive in environments where rapid learning and adaptation are key. Whether deploying end-to-end ML systems on AWS or refining language models for domain-specific tasks, I focus on both accuracy and efficient deployment.</p>
-                        <p>With a strong foundation in research and hands-on implementation, I am always eager to tackle new challenges, quickly learn emerging technologies, and refine complex models into production-ready solutions. My ability to adapt to new domains while optimizing performance makes me a valuable asset in any machine learning-driven environment.</p>
-                        <div class="about-info">
-                            <div class="info-item">
-                                <span>Name:</span>
-                                <span>Akash Pawar</span>
-                            </div>
-                            <div class="info-item">
-                                <span>Email:</span>
-                                <span>akashpawar9619@gmail.com</span>
-                            </div>
-                            <div class="info-item">
-                                <span>Location:</span>
-                                <span>Jersey City, NJ</span>
-                            </div>
-                            <div class="info-item">
-                                <span>Degree:</span>
-                                <span>MS in Machine Learning</span>
-                            </div>
-                        </div>
-                        <div class="cv-dropdown">
-                            <button class="btn primary">Download CV <i class="fas fa-chevron-down"></i></button>
-                            <div class="dropdown-content">
-                              <a href="./assets/files/Resume-Akash-Pawar-ML.pdf" download>Machine Learning CV</a>
-                              <a href="./assets/files/Resume-Akash-Pawar-DS.pdf" download>Data Science CV</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-image">
-                        <div class="image-container">
-                            <!-- Replace with your actual image path when you have one -->
-                            <!-- <div class="placeholder-image">AP</div> -->
-                            <img src="./assets/images/Akash.jpg" alt="AP">
-                        </div>
-                    </div>
-                </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <section id="experience" class="bg-alt">
-            <div class="container">
-                <h2 class="section-title">Experience</h2>
-                <div class="timeline">
-                    <!-- Stevens Institute of Technology -->
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <h3>Stevens Institute of Technology</h3>
-                                <span>Hoboken, New Jersey | September 2023 - December 2024</span>
-                            </div>
-                            <div class="timeline-project">
-                                <h4>Dependency Chain Optimization</h4>
-                                <span>Hoboken, New Jersey | September 2024 - December 2024</span>
-                                <ul>
-                                    <li>Led a team of five in developing a system for Feature-Driven Critical Node Identification and Dependency Chain Optimization using Reinforcement Learning.</li>
-                                    <li>Designed a hybrid scoring function integrating topological (degree centrality, betweenness, PageRank) and semantic (node types, dependency scopes, quality indicators) features for critical node identification.</li>
-                                    <li>Designed an adaptive data sampling approach, efficiently extracting a representative dataset from a 15M-node and 178M-edge dependency graph.</li>
-                                    <li>Developed graph processing pipelines using Neo4j, NetworkX, and Python, allowing scalable data ingestion, feature extraction, and embedding generation.</li>
-                                    <li>Processed a large-scale dependency graph with 442,275 nodes and 499,760 edges, implementing Node2Vec embeddings for structural learning.</li>
-                                    <li>Achieved 100% precision and recall in critical node classification using a Random Forest classifier, significantly outperforming baseline methods.</li>
-                                    <li>Built a reinforcement learning environment with a custom reward function to optimize dependency chains, ensuring security, performance, and freshness.</li>
-                                    <li>Implemented PPO (Proximal Policy Optimization) for reinforcement learning, leveraging a multi-head attention model for dynamic chain optimization.</li>
-                                    <li>Evaluated system performance on dependency characteristics, classification accuracy, and RL-based chain generation, demonstrating potential for real-world dependency management.</li>
-                                    <li>Conducted extensive experiments on dependency chain properties, RL training strategies, and scoring methodologies, ensuring scalability and robustness.</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-project">
-                                <h4>Temporal Analysis of COVID-19 Sentiments</h4>
-                                <span>Hoboken, New Jersey | September 2024 - December 2024</span>
-                                <ul>
-                                    <li>Objective: Analyzed public discourse and emotional responses to COVID-19 through 400,000+ tweets across three phases of the pandemic.</li>
-                                    <li>Sentiment & Emotion Analysis: Combined traditional sentiment analysis with a fine-tuned BERT model trained on 10 emotion categories, including optimism, anxiety, and denial.</li>
-                                    <li>Topic Modeling: Employed BERTopic and HDBSCAN clustering to track the evolution of public concerns, from crisis response to vaccine-related discussions.</li>
-                                    <li>Geographical Sentiment Trends: Identified regional sentiment variations, with U.S. tweets showing the highest negativity and Indian tweets reflecting a slightly positive bias.</li>
-                                    <li>Forecasting Public Sentiment: Used Prophet time-series forecasting to analyze sentiment evolution and predict future trends in public discourse.</li>
-                                    <li>Data Processing & Preprocessing: Cleaned and structured 411,887 tweets, implementing custom regex-based text cleaning, filtering, and missing-value handling.</li>
-                                    <li>Temporal Insights: Revealed shifts from crisis-focused discussions to political debates and vaccine discourse, showcasing the dynamic evolution of public sentiment.</li>
-                                    <li>Multi-Dimensional NLP Pipeline: Integrated deep learning, topic modeling, and time-series forecasting for a comprehensive understanding of societal reactions to global crises.</li>
-                                    <li>Crisis Communication Implications: Provided actionable insights into how governments and public health officials can tailor communication strategies for effective crisis management.</li>
-                                </ul>
-                            </div>
-                            <div class="timeline-project">
-                                <h4>Real Estate Value Evaluation</h4>
-                                <span>Hoboken, New Jersey | September 2023 - December 2023</span>
-                                <ul>
-                                    <li>Objective: Predicted house prices using a dataset with 79 features, applying machine learning techniques.</li>
-                                    <li>Data Processing: Analyzed dataset, handled missing values, addressed skewness, and dropped irrelevant features.</li>
-                                    <li>Feature Engineering & Dimensionality Reduction: Engineered new features, applied PCA to reduce dimensionality, and encoded categorical features based on mean sale price.</li>
-                                    <li>Outlier Detection: Identified and removed major outliers to improve model performance.</li>
-                                    <li>Clustering & Model Training: Implemented KMeans clustering, performed hyperparameter tuning, and used stacked regression models for prediction.</li>
-                                    <li>Results & Impact: Achieved a final Root Mean Squared Error (RMSE) of 14806.58 on the test dataset, optimizing performance through ensemble learning.</li>
-                                </ul>
-                            </div>
-                        </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-main">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-brain"></i>
+                        <span>AI/ML Research Engineer</span>
                     </div>
-                    <!-- Rajiv Gandhi Institute of Technology -->
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-header">
-                                <h3>Rajiv Gandhi Institute of Technology</h3>
-                                <span>Mumbai, India | August 2022 - March 2023</span>
-                            </div>
-                            <div class="timeline-project">
-                                <h4>Depression Amelioration Chatbot</h4>
-                                <ul>
-                                    <li>Led a team of four in developing a deep learning-based conversational agent for mental health intervention.</li>
-                                    <li>Designed a two-stage RoBERTa-based classification system for depression detection with 98.5% accuracy.</li>
-                                    <li>Implemented a multi-class classification model for mental health categorization, achieving 98.2% accuracy.</li>
-                                    <li>Integrated BlenderBot-400M for context-aware response generation in general conversations.</li>
-                                    <li>Developed a curated response database covering 80 unique intents to enhance chatbot reliability.</li>
-                                    <li>Engineered a conversational context management system to maintain coherence across interactions.</li>
-                                    <li>Deployed the chatbot on Discord for accessibility, anonymity, and real-time mental health support.</li>
-                                    <li>Conducted a peer-based review demonstrating a significant reduction in depressive symptoms among users.</li>
-                                    <li>Ensured ethical considerations by prioritizing data privacy and non-judgmental, empathetic responses.</li>
-                                    <li>Highlighted the potential of AI-driven mental health interventions for scalable and accessible support.</li>
-                                </ul>
-                            </div>
+                    
+                    <h1 class="hero-title">
+                        <span class="title-main">Akash Pawar</span>
+                        <span class="title-cursor">|</span>
+                    </h1>
+                    
+                    <h2 class="hero-subtitle">
+                        <span id="typed-text">Transforming Complex AI into Elegant Solutions</span>
+                    </h2>
+                    
+                    <p class="hero-description">
+                        AI engineer who bridges theory and application across domains — from fine-tuning mathematical reasoning models and vision models to protein bioinformatics and large-scale graph analysis. Specializes in rapid domain mastery and building systems that solve real problems with intelligent design.
+                    </p>
+                    
+                    <div class="hero-metrics">
+                        <div class="metric">
+                            <div class="metric-value">MS</div>
+                            <div class="metric-label">Machine Learning</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <div class="container">
-                <h2 class="section-title">Projects</h2>
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/DeepSeek.jpeg" alt="DeepSeek Fine-tuning">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/DeepseekR1-1.5B-MathFineTune" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/DeepseekR1-1.5B-MathFineTune" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
+                        <div class="metric">
+                            <div class="metric-value">3.93</div>
+                            <div class="metric-label">GPA</div>
                         </div>
-                        <div class="project-info">
-                            <h3>DeepSeek for Mathematical Reasoning</h3>
-                            <p>Fine-tuned DeepSeek-R1-Distill-Qwen-1.5B using Unsloth optimization and LoRA adaptation, achieving 2x faster inference with 98.8% parameter reduction.</p>
-                            <div class="project-tags">
-                                <span>LoRA</span>
-                                <span>Unsloth</span>
-                                <span>LLM Fine-tuning</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/Protein.jpeg" alt="Protein Localization Project">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/Protein-classification" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/Protein-classification" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Protein Subcellular Localization Predictor</h3>
-                            <p>Developed a high-accuracy protein subcellular localization predictor using Meta AI's ESM2-3B, achieving over 92% top-5 accuracy across 12 cellular locations.</p>
-                            <div class="project-tags">
-                                <span>PyTorch</span>
-                                <span>Bioinformatics</span>
-                                <span>Deep Learning</span>
-                            </div>
+                        <div class="metric">
+                            <div class="metric-value">4+</div>
+                            <div class="metric-label">Years AI/ML Experience</div>
                         </div>
                     </div>
                     
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/Rag.webp" alt="RAG System">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/Question-Answering" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/Question-Answering" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>RAG for Document QA</h3>
-                            <p>Engineered a full-stack document QA system using LangChain, Chroma vector store, and OpenAI embeddings with React frontend and FastAPI backend.</p>
-                            <div class="project-tags">
-                                <span>LangChain</span>
-                                <span>React</span>
-                                <span>FastAPI</span>
-                                <span>AWS</span>
-                                <span>Docker</span>
-                            </div>
-                        </div>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn-primary">
+                            <i class="fas fa-network-wired"></i>
+                            Explore Networks
+                        </a>
+                        <a href="#contact" class="btn-secondary">
+                            <i class="fas fa-terminal"></i>
+                            Initialize Contact
+                        </a>
                     </div>
-                    
-                    <!-- Project 4 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/Dependency.png" alt="Dependency Chain Analysis">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/Chain-Optimization" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/Chain-Optimization" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Dependency Chain Analysis</h3>
-                            <p>Processed 500,000+ relationships across 442,275 nodes using Neo4j and NetworkX, achieving 100% precision and recall in critical node identification.</p>
-                            <div class="project-tags">
-                                <span>Neo4j</span>
-                                <span>NetworkX</span>
-                                <span>Node2Vec</span>
-                                <span>Random Forest</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 5 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/CustomerRev.png" alt="Customer Feedback Analysis and Response System">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/Langchain-Customer_service" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/Langchain-Customer_service" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Customer Feedback Analysis and Response System</h3>
-                            <p>Built an automated review analysis pipeline with ChatGPT-3.5 and LangChain, achieving 95% language accuracy and 100% sentiment detection.</p>
-                            <div class="project-tags">
-                                <span>LangChain</span>
-                                <span>Prompt Engineering</span>
-                                <span>Sentiment Analysis</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 6 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/Food.jpg" alt="Classification of Food Images">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/Foodie" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/Foodie" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Classification of Food Images</h3>
-                            <p>Finetuned a model pretrained on Food101 on 10 random classes from the same dataset improving accuracy from ~90% to 99%.</p>
-                            <div class="project-tags">
-                                <span>HuggingFace</span>
-                                <span>Fine-tuning</span>
-                                <span>Gradio</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 7 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/Segformer.png" alt="Image Background Remover">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/Background-Remover" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/Background-Remover" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Image Background Remover</h3>
-                            <p>Used a pretrained image segmentation model to remove image background and apply a white outline.</p>
-                            <div class="project-tags">
-                                <span>HuggingFace</span>
-                                <span>OpenCV</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 8 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/Llama.webp" alt="Llama Chatbot">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/Llama-Chabot-Chizuru" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/Llama-Chabot-Chizuru" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Llama Chatbot</h3>
-                            <p>Fine-tuned TinyLlama-1.1B to roleplay a fictional character using QLoRA with 4-bit quantization</p>
-                            <div class="project-tags">
-                                <span>HuggingFace</span>
-                                <span>Fine-tuning</span>
-                                <span>QLoRA</span>
-                                <span>Gradio</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 9 -->
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="./assets/images/ML.png" alt="Machine Learning from Scratch">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    <a href="https://github.com/akashsp7/Scratch-ML" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                    <a href="https://github.com/akashsp7/Scratch-ML" class="project-link" target="_blank"><i class="fab fa-github"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>Machine Learning from Scratch</h3>
-                            <p>Implemented various machine learning algorithms and neural networks from scratch using only numpy and pandas.</p>
-                            <div class="project-tags">
-                                <span>Machine Learning</span>
-                                <span>NumPy</span>
-                            </div>
-                        </div>
-                    </div>
-                    
                 </div>
-                <div class="projects-cta">
-                    <a href="https://github.com/akashsp7" target="_blank" class="btn secondary">See More Projects <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="bg-alt">
-            <div class="container">
-                <h2 class="section-title">Skills</h2>
                 
-                <div class="skills-container">
-                    <!-- Category 1 -->
-                    <div class="skill-category">
-                        <h3><i class="fas fa-code"></i> Programming & Data</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fab fa-python"></i></div>
-                                <span>Python</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-database"></i></div>
-                                <span>SQL</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-table"></i></div>
-                                <span>Pandas</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-calculator"></i></div>
-                                <span>NumPy</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-chart-bar"></i></div>
-                                <span>Matplotlib</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
-                                <span>Seaborn</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-chart-pie"></i></div>
-                                <span>Tableau</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-project-diagram"></i></div>
-                                <span>NetworkX</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Category 2 -->
-                    <div class="skill-category">
-                        <h3><i class="fas fa-brain"></i> ML Frameworks</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-fire"></i></div>
-                                <span>PyTorch</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-brain"></i></div>
-                                <span>TensorFlow</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-cogs"></i></div>
-                                <span>Scikit-learn</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-tree"></i></div>
-                                <span>XGBoost</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-face-laugh-beam"></i></div>
-                                <span>Hugging Face</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fa-solid fa-crow"></i></div>
-                                <span>LangChain</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-comments"></i></div>
-                                <span>NLTK</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-eye"></i></div>
-                                <span>OpenCV</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Category 3 -->
-                    <div class="skill-category">
-                        <h3><i class="fas fa-cloud"></i> MLOps & Cloud</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fab fa-docker"></i></div>
-                                <span>Docker</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fab fa-aws"></i></div>
-                                <span>AWS</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-server"></i></div>
-                                <span>Flask</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-bolt"></i></div>
-                                <span>FastAPI</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
-                                <span>Git</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon"><i class="fas fa-project-diagram"></i></div>
-                                <span>MLflow</span>
-                            </div>
-                        </div>
+                <!-- Neural Network Visualization - Right Side -->
+                <div class="neural-network-container">
+                    <div class="horizontal-neural-network" id="horizontal-neural">
+                        <canvas id="horizontal-neural-canvas"></canvas>
+                        <div class="neural-tooltip" id="neural-tooltip"></div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <div class="scroll-dot"></div>
+        </div>
+    </section>
 
-        <section id="contact">
-            <div class="container">
-                <h2 class="section-title">Contact Me</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <h3>Email</h3>
-                            <p>akashpawar9619@gmail.com</p>
-                            <a href="mailto:akashpawar9619@gmail.com" class="btn secondary">Send Email</a>
-                        </div>
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fab fa-linkedin"></i>
-                            </div>
-                            <h3>LinkedIn</h3>
-                            <p>Connect with me professionally</p>
-                            <a href="https://www.linkedin.com/in/akash-pawar/" target="_blank" class="btn secondary">Connect</a>
-                        </div>
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fab fa-github"></i>
-                            </div>
-                            <h3>GitHub</h3>
-                            <p>Check out my code repositories</p>
-                            <a href="https://github.com/akashsp7" target="_blank" class="btn secondary">Follow</a>
-                        </div>
-                    </div>
-                    <div class="contact-form-container">
-                        <form id="contact-form" class="contact-form">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn primary">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
+    <!-- About Section -->
+    <section id="about" class="about-section">
         <div class="container">
-            <div class="social-links">
-                <a href="https://github.com/akashsp7" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/akash-pawar/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:akashpawar9619@gmail.com"><i class="fas fa-envelope"></i></a>
+            <div class="section-header">
+                <span class="section-tag">NEURAL_PROFILE.exe</span>
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Decoding the Neural Architecture</p>
             </div>
-            <p>&copy; 2025 Akash Pawar. All rights reserved.</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-description">
+                        <p>I am an AI/ML Research Engineer with expertise in Deep Learning, NLP, and traditional Machine Learning, driven by a passion for solving complex problems with intelligent systems. I am completing my Master's in Machine Learning from Stevens Institute of Technology, with a 3.93 GPA, where I honed my skills in both theoretical foundations and real-world applications.</p>
+                        
+                        <p>I have built and optimized machine learning systems across NLP, deep learning, and computational biology, tackling challenges in text classification, retrieval-augmented generation, large-scale model fine-tuning, and predictive analytics. I thrive in environments where rapid learning and adaptation are key.</p>
+                        
+                        <p>With a strong foundation in research and hands-on implementation, I am always eager to tackle new challenges, quickly learn emerging technologies, and refine complex models into production-ready solutions. My ability to adapt to new domains while optimizing performance makes me a valuable asset in any machine learning-driven environment.</p>
+                    </div>
+                    
+                    <div class="about-info">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-user"></i>
+                                <span class="info-label">Name</span>
+                                <span class="info-value">Akash Pawar</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span class="info-label">Email</span>
+                                <span class="info-value">akashpawar9619@gmail.com</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Jersey City, NJ, USA</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span class="info-label">Degree</span>
+                                <span class="info-value">MS in Machine Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="profile-container">
+                        <div class="profile-frame">
+                            <img src="./assets/images/Akash.jpg" alt="Akash Pawar" class="profile-image">
+                            <div class="profile-glow"></div>
+                        </div>
+                        <div class="neural-connections"></div>
+                    </div>
+                    
+                    <div class="cv-download">
+                        <a href="./assets/files/Resume-Akash-Pawar-ML.pdf" class="btn-download" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Machine Learning CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">EXPERIENCE_LOG.dat</span>
+                <h2 class="section-title">Work Experience</h2>
+                <p class="section-subtitle">Neural Network Training History</p>
+            </div>
+            
+            <div class="timeline">
+                <!-- Stevens Institute Research Assistant -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-pulse"></div>
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="position">Artificial Intelligence and Machine Learning Research Assistant</h3>
+                            <div class="company">
+                                <i class="fas fa-university"></i>
+                                Stevens Institute of Technology
+                            </div>
+                            <div class="duration">April 2025 - Present</div>
+                            <div class="location">Hoboken, New Jersey</div>
+                        </div>
+                        <div class="achievement-metrics">
+                            <div class="metric-badge success">95%+ reduction in grading time</div>
+                            <div class="metric-badge primary">GPT-based evaluation system</div>
+                        </div>
+                        <ul class="achievements">
+                            <li>Designed and implemented an agentic LangGraph-based evaluation system using GPT models, achieving <strong>95% reduction in grading time</strong> while maintaining assessment quality.</li>
+                            <li>Engineered modular framework with conditional routing for comprehensive code assessment across syntax, requirements fulfillment, analysis and visualization quality.</li>
+                            <li>Developed robust state management architecture with Pydantic schemas for structured LLM outputs, enabling consistent JSON feedback generation for learning management system integration.</li>
+                            <li>Built automated evaluation pipelines that process student submissions through multi-stage assessment workflows, significantly reducing manual grading overhead for academic courses.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- ElevateMe Fellowship -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-pulse"></div>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="position">Data Analytics & Machine Learning Fellow Trainee</h3>
+                            <div class="company">
+                                <i class="fas fa-rocket"></i>
+                                ElevateMe
+                            </div>
+                            <div class="duration">March 2025 - Present</div>
+                            <div class="location">Remote</div>
+                        </div>
+                        <div class="achievement-metrics">
+                            <div class="metric-badge success">Increased R² from 43.8% → 97.0%</div>
+                            <div class="metric-badge success">Average MAE of $158</div>
+                            <div class="metric-badge warning">Median Error of $39</div>
+                            <div class="metric-badge primary">Entertainment Revenue Prediction Model</div>
+                        </div>
+                        <ul class="achievements">
+                            <li>Engineered a machine learning pipeline <strong>achieving 97.0% R² score</strong> for event gross revenue prediction, progressing systematically through 6 development phases with comprehensive feature engineering that transformed baseline performance from 43.8% to production level predictive capability.</li>
+                            <li>Built production-ready data pipelines <strong>processing 305K+ entertainment contracts</strong> across multiple relational tables, implementing systematic feature engineering including artist experience tiers, genre pricing intelligence, financial commission analysis, and artist pricing anchors that revealed critical revenue drivers.</li>
+                            <li>Discovered breakthrough pricing intelligence patterns through multi-table joins and financial feature engineering, identifying that multi-artist events average 2.3x pricing multipliers and commission data serves as the strongest revenue predictor, enabling precise contract pricing within $158 accuracy.</li>
+                            <li>Developed comprehensive ML evaluation framework with cross-validation pipelines and automated feature selection, optimizing XGBoost algorithms through hyperparameter tuning and implementing smart feature pruning that reduced overfitting while maintaining 97.0% prediction accuracy for business-critical pricing decisions.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Academic Projects -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-pulse"></div>
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="position">Master's Student - Advanced Projects</h3>
+                            <div class="company">
+                                <i class="fas fa-university"></i>
+                                Stevens Institute of Technology
+                            </div>
+                            <div class="duration">Sep 2023 - Dec 2024</div>
+                            <div class="location">Hoboken, New Jersey</div>
+                        </div>
+                        <div class="achievement-metrics">
+                            <div class="metric-badge primary">Critical Node Identification</div>
+                            <div class="metric-badge primary">RL Proof of concept</div>
+                            <div class="metric-badge primary">Time series Forecasting</div>
+                            <div class="metric-badge primary">Topic Modeling and Sentiment Research</div>
+                            <div class="metric-badge primary">Sentiment Analysis: VADER vs BERT</div>
+                        </div>
+                        
+                        <!-- Project 1: Dependency Chain Analysis -->
+                        <div class="academic-project">
+                            <div class="project-header">
+                                <h4 class="project-name">Dependency Chain Analysis</h4>
+                                <span class="project-tech">Neo4j • NetworkX • ML • Reinforcement Learning</span>
+                            </div>
+                            <ul class="project-achievements">
+                                <li>Led a team of five in developing a system for Feature-Driven Critical Node Identification and Dependency Chain Optimization using Reinforcement Learning.</li>
+                                <li>Designed a hybrid scoring function integrating topological (degree centrality, betweenness, PageRank) and semantic (node types, dependency scopes, quality indicators) features for critical node identification.</li>
+                                <li>Designed an adaptive data sampling approach, efficiently extracting a representative dataset from a 15M-node and 178M-edge dependency graph.</li>
+                                <li>Developed graph processing pipelines using Neo4j, NetworkX, and Python, allowing scalable data ingestion, feature extraction, and embedding generation.</li>
+                                <li>Processed a large-scale dependency graph with 442,275 nodes and 499,760 edges, implementing Node2Vec embeddings for structural learning.</li>
+                                <li>Achieved 100% precision and recall in critical node classification using a Random Forest classifier, significantly outperforming baseline methods.</li>
+                                <li>Built a reinforcement learning environment with a custom reward function to optimize dependency chains, ensuring security, performance, and freshness.</li>
+                                <li>Implemented PPO (Proximal Policy Optimization) for reinforcement learning, leveraging a multi-head attention model for dynamic chain optimization.</li>
+                                <li>Evaluated system performance on dependency characteristics, classification accuracy, and RL-based chain generation, demonstrating potential for real-world dependency management.</li>
+                                <li>Conducted extensive experiments on dependency chain properties, RL training strategies, and scoring methodologies, ensuring scalability and robustness.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Project 2: Template Project -->
+                        <div class="academic-project">
+                            <div class="project-header">
+                                <h4 class="project-name">Temporal Analysis of COVID-19 Sentiments</h4>
+                                <span class="project-tech">PyTorch • BERTopic • Prophet</span>
+                            </div>
+                            <ul class="project-achievements">
+                                <li>Objective: Analyzed public discourse and emotional responses to COVID-19 through 400,000+ tweets across three phases of the pandemic.</li>
+                                <li>Sentiment & Emotion Analysis: Combined traditional sentiment analysis with a fine-tuned BERT model trained on 10 emotion categories, including optimism, anxiety, and denial.</li>
+                                <li>Topic Modeling: Employed BERTopic and HDBSCAN clustering to track the evolution of public concerns, from crisis response to vaccine-related discussions.</li>
+                                <li>Geographical Sentiment Trends: Identified regional sentiment variations, with U.S. tweets showing the highest negativity and Indian tweets reflecting a slightly positive bias.</li>
+                                <li>Forecasting Public Sentiment: Used Prophet time-series forecasting to analyze sentiment evolution and predict future trends in public discourse.</li>
+                                <li>Data Processing & Preprocessing: Cleaned and structured 411,887 tweets, implementing custom regex-based text cleaning, filtering, and missing-value handling.</li>
+                                <li>Temporal Insights: Revealed shifts from crisis-focused discussions to political debates and vaccine discourse, showcasing the dynamic evolution of public sentiment.</li>
+                                <li>Multi-Dimensional NLP Pipeline: Integrated deep learning, topic modeling, and time-series forecasting for a comprehensive understanding of societal reactions to global crises.</li>
+                                <li>Crisis Communication Implications: Provided actionable insights into how governments and public health officials can tailor communication strategies for effective crisis management.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bachelor's Projects -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="marker-pulse"></div>
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="position">Bachelor's Student - Capstone Project</h3>
+                            <div class="company">
+                                <i class="fas fa-university"></i>
+                                Mumbai University
+                            </div>
+                            <div class="duration">Aug 2019 - May 2023</div>
+                            <div class="location">Mumbai, India</div>
+                        </div>
+                        <div class="achievement-metrics">
+                            <div class="metric-badge success">98.5% accuracy detecting depression</div>
+                            <div class="metric-badge primary">Sentiment detection and classification</div>
+                            <div class="metric-badge success">98.2% accuracy classifying type of sentiment </div>
+                            <div class="metric-badge primary">Context aware system</div>
+                        </div>
+                        
+                        <!-- Bachelor's Project -->
+                        <div class="academic-project">
+                            <div class="project-header">
+                                <h4 class="project-name">Depression Amelioration Chatbot</h4>
+                                <span class="project-tech">RoBERTa • SLM • Chatbot • Tensforflow</span>
+                            </div>
+                            <ul class="project-achievements">
+                                <li>Led a team of four in developing a deep learning-based conversational agent for mental health intervention.</li>
+                                <li>Designed a two-stage RoBERTa-based classification system for depression detection with 98.5% accuracy.</li>
+                                <li>Implemented a multi-class classification model for mental health categorization, achieving 98.2% accuracy.</li>
+                                <li>Integrated BlenderBot-400M for context-aware response generation in general conversations.</li>
+                                <li>Developed a curated response database covering 80 unique intents to enhance chatbot reliability.</li>
+                                <li>Engineered a conversational context management system to maintain coherence across interactions.</li>
+                                <li>Deployed the chatbot on Discord for accessibility, anonymity, and real-time mental health support.</li>
+                                <li>Conducted a peer-based review demonstrating a significant reduction in depressive symptoms among users.</li>
+                                <li>Ensured ethical considerations by prioritizing data privacy and non-judgmental, empathetic responses.</li>
+                                <li>Highlighted the potential of AI-driven mental health interventions for scalable and accessible support.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">PROJECT_NETWORKS.json</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Neural Architectures in Action</p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- DeepSeek Mathematical Reasoning -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/Math2.png" alt="DeepSeek Mathematical Reasoning">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>DeepSeek Mathematical Reasoning</h4>
+                                <p>Fine-tuned model outperforming Claude-3.5 Sonnet with 98.8% parameter reduction</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/DeepseekR1-1.5B-MathFineTune" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">DeepSeek Mathematical Reasoning</h3>
+                            <!-- <span class="project-date">Feb 2025</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge success">⚡ Outperformed Claude-3.5</span>
+                            <span class="badge primary">📊 98.8% Parameter Reduction</span>
+                            <span class="badge secondary">🚀 2x Inference Speed</span>
+                        </div>
+                        <p class="project-description">
+                            Fine-tuned DeepSeek-R1-Distill-Qwen-1.5B model that outperformed Claude-3.5 Sonnet on mathematical reasoning tasks. Reduced trainable parameters by 98.8% while doubling inference speed through LoRA adaptation and Unsloth framework optimization.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">LoRA</span>
+                            <span class="tech">Unsloth</span>
+                            <span class="tech">LLM Fine-tuning</span>
+                            <span class="tech">Mathematical Reasoning</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Protein Subcellular Localization -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/dna.jpeg" alt="Protein Subcellular Localization">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>Protein Localization Predictor</h4>
+                                <p>High-accuracy protein localization using Meta AI's ESM2-3B with 92.09% top-5 accuracy</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/Protein-classification" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Protein Subcellular Localization Predictor</h3>
+                            <!-- <span class="project-date">February 2025</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge success">🎯 92.09% Top-5 Accuracy</span>
+                            <span class="badge primary">⚡ 1.8x Training Speed</span>
+                            <span class="badge secondary">💾 50% Memory Reduction</span>
+                        </div>
+                        <p class="project-description">
+                            High-accuracy protein localization system using Meta AI's ESM2-3B, achieving 84.79% top-3 and 92.09% top-5 accuracy across 12 cellular locations. Optimized training performance through mixed precision and gradient checkpointing.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">ESM2</span>
+                            <span class="tech">PyTorch</span>
+                            <span class="tech">Bioinformatics</span>
+                            <span class="tech">Mixed Precision</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RAG Document QA System -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/rag.jpeg" alt="RAG Document QA System">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>RAG Document QA System</h4>
+                                <p>Full-stack document QA system with LangChain, Chroma, and React frontend</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/Question-Answering" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">RAG Document QA System</h3>
+                            <!-- <span class="project-date">Ongoing</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge primary">🔧 Full-Stack Implementation</span>
+                            <span class="badge secondary">☁️ AWS S3 Integration</span>
+                            <span class="badge success">🔍 Vector Search Optimized</span>
+                        </div>
+                        <p class="project-description">
+                            Engineered full-stack document QA system using LangChain, Chroma vector store, and OpenAI embeddings with React frontend and FastAPI backend. Implements recursive text splitting with comprehensive S3 integration.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">LangChain</span>
+                            <span class="tech">React</span>
+                            <span class="tech">FastAPI</span>
+                            <span class="tech">AWS</span>
+                            <span class="tech">Docker</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dependency Chain Analysis -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/chain.jpeg" alt="Dependency Chain Analysis">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>Dependency Chain Analysis</h4>
+                                <p>Large-scale graph analysis with Neo4j achieving 100% F1-score in critical node identification</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/Chain-Optimization" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Dependency Chain Analysis</h3>
+                            <!-- <span class="project-date">December 2024</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge success">🎯 100% F1-Score</span>
+                            <span class="badge primary">⚡ 25s Processing Time</span>
+                            <span class="badge secondary">📊 500K+ Relationships</span>
+                        </div>
+                        <p class="project-description">
+                            Processed 500,000+ relationships across 442,275 nodes in large-scale dependency graph using Neo4j and NetworkX. Implemented Node2Vec embeddings combined with handcrafted features, achieving perfect classification metrics.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">Neo4j</span>
+                            <span class="tech">NetworkX</span>
+                            <span class="tech">Node2Vec</span>
+                            <span class="tech">Random Forest</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- LLM-Powered Automated Code Evaluation System -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/tutor.png" alt="LLM-Powered Automated Code Evaluation System">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>LLM-Powered Code Evaluation</h4>
+                                <p>Agentic LangGraph-based evaluation system with 95% reduction in grading time</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/Llama-Chabot-Chizuru" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">LLM-Powered Code Evaluation</h3>
+                            <!-- <span class="project-date">Ongoing</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge success">🚀 95% Time Reduction</span>
+                            <span class="badge primary">🤖 Automated Grading</span>
+                            <span class="badge secondary">📊 JSON Feedback</span>
+                        </div>
+                        <p class="project-description">
+                            Built an agentic LangGraph-based evaluation system using GPT models that achieved 95% reduction in grading time while maintaining assessment quality. Features modular framework with conditional routing for syntax, requirements, and visualization assessment.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">LangGraph</span>
+                            <span class="tech">OpenAI GPT</span>
+                            <span class="tech">Pydantic</span>
+                            <span class="tech">Python AST</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interactive Neural Network Visualizer -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/visual.jpeg" alt="Interactive Neural Network Visualizer">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>Neural Network Visualizer</h4>
+                                <p>Real-time neural network visualization with live activations and SVG animations</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/Llama-Chabot-Chizuru" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Interactive Neural Network Visualizer</h3>
+                            <!-- <span class="project-date">Ongoing</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge primary">⚡ Real-time Viz</span>
+                            <span class="badge secondary">🎨 SVG Animation</span>
+                            <span class="badge success">🖼️ 28x28 Grid</span>
+                        </div>
+                        <p class="project-description">
+                            Real-time neural network visualization system with React frontend and FastAPI backend. Features live visualization of hidden layer activations, inter-layer connections via SVG, and prediction probabilities as users draw digits on interactive grid.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">React</span>
+                            <span class="tech">FastAPI</span>
+                            <span class="tech">Real-time Viz</span>
+                            <span class="tech">SVG Animation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Neural Machine Translation System -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/mltrans.jpeg" alt="Neural Machine Translation System">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>Neural Machine Translation</h4>
+                                <p>English-to-Spanish translation using bidirectional LSTM encoder-decoder architecture</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/Llama-Chabot-Chizuru" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Neural Machine Translation</h3>
+                            <!-- <span class="project-date">Academic Project</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge primary">🔄 Bidirectional LSTM</span>
+                            <span class="badge secondary">📊 BLEU Evaluation</span>
+                            <span class="badge success">🎯 Teacher Forcing</span>
+                        </div>
+                        <p class="project-description">
+                            English-to-Spanish neural machine translation using bidirectional LSTM encoder-decoder architecture. Implements character-level tokenization with temperature-based multinomial sampling for improved translation diversity.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">Bidirectional LSTM</span>
+                            <span class="tech">Seq2Seq</span>
+                            <span class="tech">BLEU Evaluation</span>
+                            <span class="tech">Teacher Forcing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Advanced LLM Fine-tuning with Data Curation -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/qwen.jpeg" alt="Advanced LLM Fine-tuning with Data Curation">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>LLM Data Curation Pipeline</h4>
+                                <p>Comprehensive LLM optimization with NVIDIA curator achieving 6.7% validation loss reduction</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/Llama-Chabot-Chizuru" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Advanced LLM Fine-tuning</h3>
+                            <!-- <span class="project-date">Advanced Project</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge success">📉 6.7% Loss Reduction</span>
+                            <span class="badge primary">🎯 NVIDIA Curator</span>
+                            <span class="badge secondary">⚡ KV-Cache</span>
+                        </div>
+                        <p class="project-description">
+                            Implemented comprehensive LLM optimization pipeline using NVIDIA's prompt-task-and-complexity-classifier for intelligent data curation. Achieved 6.7% validation loss reduction with filtered datasets on resource-constrained environments.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">NVIDIA Curator</span>
+                            <span class="tech">QLoRA</span>
+                            <span class="tech">Data Curation</span>
+                            <span class="tech">KV-Cache</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Machine Learning from Scratch -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/images/scratch.png" alt="Machine Learning from Scratch">
+                        <div class="project-overlay">
+                            <div class="overlay-content">
+                                <h4>ML from Scratch</h4>
+                                <p>Complete 2-layer neural network with manual backpropagation using only NumPy</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/akashsp7/Scratch-ML" target="_blank" class="project-link">
+                                        <i class="fab fa-github"></i>
+                                        Repository
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3 class="project-title">Machine Learning from Scratch</h3>
+                            <!-- <span class="project-date">Educational</span> -->
+                        </div>
+                        <div class="performance-badges">
+                            <span class="badge primary">🧠 Manual Backprop</span>
+                            <span class="badge secondary">🔢 NumPy Only</span>
+                            <span class="badge success">⚡ Xavier Init</span>
+                        </div>
+                        <p class="project-description">
+                            Implemented complete 2-layer neural network with manual backpropagation using only NumPy, tested on MNIST and Fashion-MNIST datasets. Features Xavier initialization, numerically stable softmax, and custom learning rate scheduling.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech">NumPy</span>
+                            <span class="tech">Manual Backprop</span>
+                            <span class="tech">MNIST</span>
+                            <span class="tech">Xavier Init</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-cta">
+                <a href="https://github.com/akashsp7" target="_blank" class="contact-btn">
+                    <span>Explore More Projects</span>
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">SKILL_MATRIX.cfg</span>
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-subtitle">Neural Toolkit & Technologies</p>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-brain"></i>
+                        <h3>LLM & Neural Networks</h3>
+                    </div>
+                    <div class="skill-nodes">
+                        <div class="skill-node">PyTorch</div>
+                        <div class="skill-node">Hugging Face</div>
+                        <div class="skill-node">LangChain</div>
+                        <div class="skill-node">LangGraph</div>
+                        <div class="skill-node">LangSmith</div>
+                        <div class="skill-node">LoRA/QLoRA</div>
+                        <div class="skill-node">ESM2</div>
+                        <div class="skill-node">Unsloth</div>
+                        <div class="skill-node">TRL</div>
+                        <div class="skill-node">PEFT</div>
+                        <div class="skill-node">BitsAndBytes</div>
+                        <div class="skill-node">Attention Mechanisms</div>
+                        <div class="skill-node">BERT</div>
+                        <div class="skill-node">GPT</div>
+                        <div class="skill-node">Transformers</div>
+                        <div class="skill-node">RLHF</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-cloud"></i>
+                        <h3>MLOps & Cloud</h3>
+                    </div>
+                    <div class="skill-nodes">
+                        <div class="skill-node">Docker</div>
+                        <div class="skill-node">AWS</div>
+                        <div class="skill-node">Azure ML</div>
+                        <div class="skill-node">FastAPI</div>
+                        <div class="skill-node">Flask</div>
+                        <div class="skill-node">Git</div>
+                        <div class="skill-node">MLflow</div>
+                        <div class="skill-node">Weights & Biases</div>
+                        <div class="skill-node">Gradio</div>
+                        <div class="skill-node">AWS S3</div>
+                        <div class="skill-node">AWS Lambda</div>
+                        <div class="skill-node">SageMaker</div>
+                        <div class="skill-node">Mixed Precision</div>
+                        <div class="skill-node">Gradient Checkpointing</div>
+                        <div class="skill-node">KV-Cache</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-database"></i>
+                        <h3>Databases & Data Engineering</h3>
+                    </div>
+                    <div class="skill-nodes">
+                        <div class="skill-node">SQL</div>
+                        <div class="skill-node">MySQL</div>
+                        <div class="skill-node">Neo4j</div>
+                        <div class="skill-node">DuckDB</div>
+                        <div class="skill-node">Chroma</div>
+                        <div class="skill-node">Pinecone</div>
+                        <div class="skill-node">Vector Databases</div>
+                        <div class="skill-node">ETL Pipelines</div>
+                        <div class="skill-node">Data Preprocessing</div>
+                        <div class="skill-node">Feature Engineering</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Programming & Frameworks</h3>
+                    </div>
+                    <div class="skill-nodes">
+                        <div class="skill-node">Python</div>
+                        <div class="skill-node">JavaScript</div>
+                        <div class="skill-node">NumPy</div>
+                        <div class="skill-node">Pandas</div>
+                        <div class="skill-node">Dask</div>
+                        <div class="skill-node">Pydantic</div>
+                        <div class="skill-node">Regex</div>
+                        <div class="skill-node">JSON</div>
+                        <div class="skill-node">Subprocess</div>
+                        <div class="skill-node">React</div>
+                        <div class="skill-node">TailwindCSS</div>
+                        <div class="skill-node">Vite</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Visualization & Analytics</h3>
+                    </div>
+                    <div class="skill-nodes">
+                        <div class="skill-node">Seaborn</div>
+                        <div class="skill-node">Matplotlib</div>
+                        <div class="skill-node">Plotly</div>
+                        <div class="skill-node">Streamlit</div>
+                        <div class="skill-node">Tableau</div>
+                        <div class="skill-node">NetworkX</div>
+                        <div class="skill-node">SVG Animations</div>
+                        <div class="skill-node">Real-time Viz</div>
+                        <div class="skill-node">Interactive Dashboards</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-robot"></i>
+                        <h3>ML & Deep Learning</h3>
+                    </div>
+                    <div class="skill-nodes">
+                        <div class="skill-node">TensorFlow</div>
+                        <div class="skill-node">Scikit-learn</div>
+                        <div class="skill-node">XGBoost</div>
+                        <div class="skill-node">LightGBM</div>
+                        <div class="skill-node">Random Forest</div>
+                        <div class="skill-node">FLAML</div>
+                        <div class="skill-node">CNN</div>
+                        <div class="skill-node">RNN/LSTM</div>
+                        <div class="skill-node">GRU</div>
+                        <div class="skill-node">Autoencoders</div>
+                        <div class="skill-node">Reinforcement Learning</div>
+                        <div class="skill-node">Transfer Learning</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-language"></i>
+                        <h3>NLP & Text Processing</h3>
+                    </div>
+                    <div class="skill-nodes">
+                        <div class="skill-node">OpenAI</div>
+                        <div class="skill-node">spaCy</div>
+                        <div class="skill-node">NLTK</div>
+                        <div class="skill-node">BERTopic</div>
+                        <div class="skill-node">TF-IDF</div>
+                        <div class="skill-node">BM25</div>
+                        <div class="skill-node">Word2Vec</div>
+                        <div class="skill-node">Sentence Transformers</div>
+                        <div class="skill-node">Text Mining</div>
+                        <div class="skill-node">Sentiment Analysis</div>
+                        <div class="skill-node">Tokenization</div>
+                        <div class="skill-node">Prophet</div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Specialized Techniques</h3>
+                    </div>
+                    <div class="skill-nodes">
+                        <div class="skill-node">Computer Vision</div>
+                        <div class="skill-node">Image Segmentation</div>
+                        <div class="skill-node">Time Series Analysis</div>
+                        <div class="skill-node">Graph Analysis</div>
+                        <div class="skill-node">Node2Vec</div>
+                        <div class="skill-node">Protein Bioinformatics</div>
+                        <div class="skill-node">Statistical ML</div>
+                        <div class="skill-node">Hyperparameter Optimization</div>
+                        <div class="skill-node">Cross Validation</div>
+                        <div class="skill-node">A/B Testing</div>
+                        <div class="skill-node">Ensemble Methods</div>
+                        <div class="skill-node">SMOTE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">CONTACT_INTERFACE.init</span>
+                <h2 class="section-title">Initialize Contact</h2>
+                <p class="section-subtitle">Neural Network Connections</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                        <div class="icon-glow"></div>
+                    </div>
+                    <div class="contact-content">
+                        <h3 class="contact-title">Neural Mail</h3>
+                        <p class="contact-info">akashpawar9619@gmail.com</p>
+                        <a href="mailto:akashpawar9619@gmail.com" class="contact-btn">
+                            <span>Connect</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                        <div class="icon-glow"></div>
+                    </div>
+                    <div class="contact-content">
+                        <h3 class="contact-title">Professional Network</h3>
+                        <p class="contact-info">LinkedIn Profile</p>
+                        <a href="https://www.linkedin.com/in/akash-pawar/" target="_blank" class="contact-btn">
+                            <span>Connect</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                        <div class="icon-glow"></div>
+                    </div>
+                    <div class="contact-content">
+                        <h3 class="contact-title">Code Repository</h3>
+                        <p class="contact-info">GitHub Projects</p>
+                        <a href="https://github.com/akashsp7" target="_blank" class="contact-btn">
+                            <span>Explore</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-footer">
+                <p>Ready to push the boundaries of AI together?</p>
+                <div class="neural-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Akash Pawar. All rights reserved. | Neural Portfolio v2.0</p>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="scripts.js"></script>
 </body>
 </html>

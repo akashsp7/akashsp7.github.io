@@ -41,6 +41,7 @@ function initializePortfolio() {
     console.log('🧠 Initializing Neural Portfolio...');
     
     // Initialize all systems
+    initializeConstellationBackground();
     initializeNavigation();
     initializeScrollAnimations();
     initializeTypingEffect();
@@ -48,6 +49,18 @@ function initializePortfolio() {
     initializeMouseTracking();
     
     console.log('✅ Neural Portfolio Initialized Successfully!');
+}
+
+// ===========================
+// CONSTELLATION BACKGROUND SYSTEM
+// ===========================
+
+let constellationBg = null;
+
+function initializeConstellationBackground() {
+    console.log('🌟 Constellation background will be initialized by constellation-bg.js');
+    // The ConstellationBackground is now handled by its own script file
+    // This function is kept for compatibility but doesn't do the initialization
 }
 
 // ===========================
@@ -251,36 +264,54 @@ function initializeTypingEffect() {
     if (!typedElement) return;
     
     const text = typedElement.textContent;
+    const parentElement = typedElement.parentElement;
     
     // Create invisible placeholder to reserve space and prevent layout shift
     const placeholder = document.createElement('span');
     placeholder.textContent = text;
-    placeholder.style.visibility = 'hidden';
-    placeholder.style.position = 'absolute';
-    placeholder.style.top = '0';
-    placeholder.style.left = '0';
-    placeholder.style.right = '0';
-    placeholder.style.pointerEvents = 'none';
+    placeholder.style.cssText = `
+        visibility: hidden;
+        position: static;
+        display: block;
+        width: 100%;
+        pointer-events: none;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        text-align: inherit;
+        word-wrap: break-word;
+        white-space: normal;
+    `;
     
-    // Position the typing text absolutely over the placeholder
-    typedElement.style.position = 'absolute';
-    typedElement.style.top = '0';
-    typedElement.style.left = '0';
-    typedElement.style.right = '0';
-    typedElement.style.textAlign = 'center';
+    // Set up the parent container to handle the layout properly
+    parentElement.style.position = 'relative';
+    parentElement.style.minHeight = 'auto';
     
-    // Add placeholder to reserve space
-    typedElement.parentElement.style.position = 'relative';
-    typedElement.parentElement.appendChild(placeholder);
+    // Add placeholder first to establish the correct height
+    parentElement.appendChild(placeholder);
+    
+    // Get the actual height needed after placeholder is added to DOM
+    const placeholderHeight = placeholder.offsetHeight;
+    
+    // Now position the typing text absolutely over the placeholder
+    typedElement.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        text-align: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        word-wrap: break-word;
+        white-space: normal;
+    `;
+    
+    // Set the container height to match the placeholder height
+    parentElement.style.minHeight = `${placeholderHeight}px`;
     
     typedElement.textContent = '';
-    
-    // Ensure cursor is always visible in layout to prevent shifting
-    const cursor = document.querySelector('.title-cursor');
-    if (cursor) {
-        cursor.style.display = 'inline';
-        cursor.style.opacity = '0'; // Hide during typing
-    }
     
     let index = 0;
     
@@ -290,10 +321,10 @@ function initializeTypingEffect() {
             index++;
             setTimeout(typeNextCharacter, config.animations.typingSpeed);
         } else {
-            // Show blinking cursor by making it visible
-            if (cursor) {
-                cursor.style.opacity = '1';
-            }
+            // Animation complete - clean up and restore normal layout
+            placeholder.remove();
+            typedElement.style.position = 'static';
+            parentElement.style.minHeight = 'auto';
         }
     }
     

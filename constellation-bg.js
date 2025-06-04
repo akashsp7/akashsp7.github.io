@@ -13,19 +13,23 @@ class ConstellationBackground {
         this.mouseX = 0;
         this.mouseY = 0;
         this.seededRandom = this.createSeededRandom(42); // Fixed seed for consistent positioning
+        this.lastCanvasWidth = 0;
+        this.lastCanvasHeight = 0;
+        this.resizeTimeout = null;
         
         // Configuration
         this.config = {
-            starCount: 180, // Increased for more scattered effect
+            starCount: 300, // Increased for more scattered effect
             starSize: { min: 0.5, max: 2.5 },
             starOpacity: { min: 0.1, max: 0.8 },
-            twinkleSpeed: 0.02,
-            constellationOpacity: 0.45, // Increased for better visibility during blinking
-            connectionDistance: 140, // Increased for more scattered connections
+            twinkleSpeed: 0.2,
+            constellationOpacity: 0.25, // Increased for brighter lines
+            connectionDistance: 75, // Reduced to have fewer connections
             mouseMagnification: 40,
-            blinkIntensity: 0.8, // New: Controls how dramatic the blinking is
-            blinkSpeed: 0.015, // New: Speed of blinking effect
-            sideWeight: 0.7, // New: How much to bias towards left/right sides (0.5 = no bias, 1 = only sides)
+            blinkIntensity: 0, // Dramatically increased for obvious blinking
+            blinkSpeed: 1, // Much faster blinking for obvious effect
+            sideWeight: 0.7, // How much to bias towards left/right sides
+            connectionProbability: 0.25, // New: Reduced from 60% to 30% for fewer lines
             colors: {
                 stars: ['#00d4ff', '#6366f1', '#8b5cf6', '#00ff88', '#ffffff'],
                 constellations: '#00d4ff'
@@ -69,6 +73,11 @@ class ConstellationBackground {
         this.canvas.style.zIndex = '1';
 
         container.appendChild(this.canvas);
+        
+        // Set initial canvas size tracking
+        this.lastCanvasWidth = window.innerWidth;
+        this.lastCanvasHeight = window.innerHeight;
+        
         this.resize();
     }
 
@@ -125,11 +134,15 @@ class ConstellationBackground {
                 pulseSpeed: this.seededRandom() * 0.02 + 0.004,
                 pulsePhase: this.seededRandom() * Math.PI * 2,
                 pulseAmplitude: this.seededRandom() * 0.7 + 0.5,
-                // New: Enhanced blinking properties
-                blinkSpeed: this.seededRandom() * this.config.blinkSpeed * 2 + 0.008, // Faster blinking for constellations
-                blinkPhase: this.seededRandom() * Math.PI * 2,
-                blinkAmplitude: this.seededRandom() * this.config.blinkIntensity + 0.3, // More dramatic blinking
+                // New: Enhanced blinking properties - much more dramatic
+                blinkSpeed: 0.7, // Much faster and more varied
+                blinkPhase: (this.seededRandom() * Math.PI) + 4.3,
+                blinkAmplitude: 0.8, // Much more dramatic blinking
                 blinkOffset: this.seededRandom() * Math.PI * 2 // Unique phase offset for each constellation
+                // blinkSpeed: 0, // Much faster and more varied
+                // blinkPhase: 0,
+                // blinkAmplitude: 0, // Much more dramatic blinking
+                // blinkOffset: 0 // Unique phase offset for each constellation
             };
 
             // Find nearby stars to form constellation - made more scattered
@@ -143,16 +156,20 @@ class ConstellationBackground {
                     constellation.stars.push(j);
                     processed.add(j);
                     
-                    // Create connections between stars in this constellation - higher connection probability
+                    // Create connections between stars in this constellation - reduced connection probability
                     for (let k = 0; k < constellation.stars.length - 1; k++) {
-                        if (this.seededRandom() > 0.4) { // 60% chance of connection (increased from 40%)
+                        if (this.seededRandom() < this.config.connectionProbability) { // Reduced to 30% for fewer lines
                             constellation.connections.push({
                                 from: constellation.stars[k],
                                 to: constellation.stars[constellation.stars.length - 1],
-                                // New: Individual connection blinking properties
-                                blinkSpeed: this.seededRandom() * this.config.blinkSpeed * 1.5 + 0.006,
-                                blinkPhase: this.seededRandom() * Math.PI * 2,
-                                blinkAmplitude: this.seededRandom() * this.config.blinkIntensity + 0.2
+                                // New: Individual connection blinking properties - much more dramatic
+                                // blinkSpeed: this.seededRandom() * 1.5 + 2,
+                                // blinkPhase: this.seededRandom() * Math.PI * 2,
+                                // blinkAmplitude: this.seededRandom() * 1.2 + 0.5
+                                blinkSpeed: 0.9, // Smaller = slower. Try between 0.001 and 0.005
+                                blinkPhase: (this.seededRandom() * Math.PI) + 4.3 , // Still good to randomize so stars don’t sync
+                                blinkAmplitude: 0.8 // Lower amplitude = more subtle. Try between 0.2 and 0.4
+
                             });
                         }
                     }
@@ -176,19 +193,44 @@ class ConstellationBackground {
     resize() {
         if (!this.canvas) return;
         
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        const newWidth = window.innerWidth;
+        const newHeight = window.innerHeight;
+        
+        // Only resize if there's a significant change (prevents mobile scroll regeneration)
+        const widthChange = Math.abs(newWidth - this.lastCanvasWidth);
+        const heightChange = Math.abs(newHeight - this.lastCanvasHeight);
+        
+        if (widthChange < 50 && heightChange < 50) {
+            // Just update canvas dimensions without regenerating stars
+            this.canvas.width = newWidth;
+            this.canvas.height = newHeight;
+            return;
+        }
+        
+        this.lastCanvasWidth = newWidth;
+        this.lastCanvasHeight = newHeight;
+        
+        this.canvas.width = newWidth;
+        this.canvas.height = newHeight;
         
         // Reset seeded random to maintain consistent positioning
         this.seededRandom = this.createSeededRandom(42);
         
-        // Regenerate stars with consistent positioning
+        // Regenerate stars with consistent positioning only on significant resize
         this.generateStars();
         this.generateConstellations();
     }
 
     bindEvents() {
-        window.addEventListener('resize', () => this.resize());
+        // Debounced resize to prevent mobile scroll issues
+        window.addEventListener('resize', () => {
+            if (this.resizeTimeout) {
+                clearTimeout(this.resizeTimeout);
+            }
+            this.resizeTimeout = setTimeout(() => {
+                this.resize();
+            }, 100); // 100ms debounce
+        });
         
         // Track mouse movement for subtle interactive effect
         document.addEventListener('mousemove', (e) => {
@@ -281,63 +323,40 @@ class ConstellationBackground {
 
     drawConstellations(time) {
         this.constellations.forEach(constellation => {
-            // Calculate constellation center for regional effects
-            const centerX = constellation.stars.reduce((sum, starIndex) => sum + this.stars[starIndex].x, 0) / constellation.stars.length;
-            const centerY = constellation.stars.reduce((sum, starIndex) => sum + this.stars[starIndex].y, 0) / constellation.stars.length;
+            // DRAMATIC BLINKING EFFECT - much more obvious
+            const mainBlink = Math.sin(time * constellation.blinkSpeed + constellation.blinkPhase);
+            const blinkEffect = Math.abs(mainBlink) * constellation.blinkAmplitude; // Use abs for more dramatic on/off effect
             
-            // Enhanced blinking effect - more dramatic than before
-            const mainBlink = Math.sin(time * constellation.blinkSpeed + constellation.blinkPhase) * constellation.blinkAmplitude;
-            const secondaryBlink = Math.cos(time * constellation.blinkSpeed * 0.7 + constellation.blinkOffset) * 0.3;
-            const blinkEffect = Math.max(0.1, (mainBlink + secondaryBlink + 1.0) * 0.5); // Ensure minimum visibility
-            
-            // Add spatial wave effects for regional brightening
-            const spatialWave1 = Math.sin(time * 0.008 + centerX * 0.004) * 0.4;
-            const spatialWave2 = Math.cos(time * 0.006 + centerY * 0.005) * 0.3;
-            const spatialBonus = (spatialWave1 + spatialWave2) * 0.5 + 1.0;
-            
-            // Constellation breathing effect combined with blinking
-            const pulse = Math.sin(time * constellation.pulseSpeed + constellation.pulsePhase) * constellation.pulseAmplitude + 0.5;
-            const finalEffect = blinkEffect * pulse * spatialBonus;
-            const opacity = this.config.constellationOpacity * constellation.brightness * finalEffect;
+            // Base opacity that varies dramatically from 0.2 to 1.0 (brighter minimum)
+            const baseOpacity = 0.2 + (blinkEffect * 0.8);
+            const opacity = this.config.constellationOpacity * constellation.brightness * baseOpacity;
             
             this.ctx.save();
-            this.ctx.globalAlpha = Math.min(1, Math.max(0.05, opacity)); // Ensure some minimum and maximum
+            this.ctx.globalAlpha = Math.max(0.1, Math.min(1, opacity));
             this.ctx.strokeStyle = this.config.colors.constellations;
-            this.ctx.lineWidth = 0.6 + (finalEffect * 1.8); // More dramatic line width changes
-            this.ctx.shadowBlur = 1 + (finalEffect * 8); // More dramatic glow changes
+            
+            // Thinner line width that varies less dramatically
+            this.ctx.lineWidth = 0.3 + (blinkEffect * 0.8); // Much thinner range (0.3 to 1.1)
+            this.ctx.shadowBlur = blinkEffect * 6; // Reduced glow for cleaner look
             this.ctx.shadowColor = this.config.colors.constellations;
             
-            // Draw connections with individual blinking
+            // Draw connections with individual dramatic blinking
             constellation.connections.forEach(connection => {
                 const fromStar = this.stars[connection.from];
                 const toStar = this.stars[connection.to];
                 
                 if (fromStar && toStar) {
-                    // Individual connection blinking effect
-                    const connectionBlink = Math.sin(time * connection.blinkSpeed + connection.blinkPhase) * connection.blinkAmplitude;
-                    const connectionEffect = Math.max(0.1, (connectionBlink + 1.0) * 0.5);
-                    const combinedEffect = finalEffect * connectionEffect;
+                    // Individual connection blinking - very dramatic
+                    const connectionBlink = Math.sin(time * connection.blinkSpeed + connection.blinkPhase);
+                    const connectionEffect = Math.abs(connectionBlink) * connection.blinkAmplitude;
                     
-                    // Create enhanced gradient line with blink-based intensity
-                    const gradient = this.ctx.createLinearGradient(
-                        fromStar.x, fromStar.y, toStar.x, toStar.y
-                    );
+                    // Combined effect creates very obvious but cleaner blinking
+                    const finalOpacity = Math.max(0.1, (blinkEffect + connectionEffect) * 0.6); // Brighter overall
                     
-                    // Convert hex color to rgba for proper alpha support
-                    const baseColor = this.config.colors.constellations;
-                    const r = parseInt(baseColor.slice(1, 3), 16);
-                    const g = parseInt(baseColor.slice(3, 5), 16);
-                    const b = parseInt(baseColor.slice(5, 7), 16);
-                    const alpha = Math.min(1, combinedEffect * 0.9);
-                    
-                    gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.7})`);
-                    gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${alpha})`);
-                    gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, ${alpha * 0.7})`);
-                    
-                    // Temporarily adjust line properties for this connection
-                    this.ctx.strokeStyle = gradient;
-                    this.ctx.lineWidth = (0.6 + (combinedEffect * 1.8)) * (0.8 + connectionEffect * 0.4);
-                    this.ctx.shadowBlur = (1 + (combinedEffect * 8)) * (0.7 + connectionEffect * 0.6);
+                    // Set opacity for this specific line
+                    this.ctx.globalAlpha = finalOpacity;
+                    this.ctx.lineWidth = 0.3 + (connectionEffect * 0.7); // Thinner lines
+                    this.ctx.shadowBlur = connectionEffect * 4; // Reduced glow
                     
                     this.ctx.beginPath();
                     this.ctx.moveTo(fromStar.x, fromStar.y);
@@ -353,6 +372,9 @@ class ConstellationBackground {
     destroy() {
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
+        }
+        if (this.resizeTimeout) {
+            clearTimeout(this.resizeTimeout);
         }
         if (this.canvas) {
             this.canvas.remove();

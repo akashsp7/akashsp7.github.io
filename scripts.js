@@ -9,7 +9,8 @@
 
 const config = {
     animations: {
-        typingSpeed: 100,
+        typingSpeed: 50, // Reduced for smoother effect
+        typingVariation: 30, // New: adds natural variation
         scrollOffset: 0.1,
         transitionDuration: 300
     },
@@ -264,72 +265,53 @@ function initializeTypingEffect() {
     if (!typedElement) return;
     
     const text = typedElement.textContent;
-    const parentElement = typedElement.parentElement;
-    
-    // Create invisible placeholder to reserve space and prevent layout shift
-    const placeholder = document.createElement('span');
-    placeholder.textContent = text;
-    placeholder.style.cssText = `
-        visibility: hidden;
-        position: static;
-        display: block;
-        width: 100%;
-        pointer-events: none;
-        font-size: inherit;
-        font-weight: inherit;
-        line-height: inherit;
-        text-align: inherit;
-        word-wrap: break-word;
-        white-space: normal;
-    `;
-    
-    // Set up the parent container to handle the layout properly
-    parentElement.style.position = 'relative';
-    parentElement.style.minHeight = 'auto';
-    
-    // Add placeholder first to establish the correct height
-    parentElement.appendChild(placeholder);
-    
-    // Get the actual height needed after placeholder is added to DOM
-    const placeholderHeight = placeholder.offsetHeight;
-    
-    // Now position the typing text absolutely over the placeholder
-    typedElement.style.cssText = `
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        text-align: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        line-height: inherit;
-        word-wrap: break-word;
-        white-space: normal;
-    `;
-    
-    // Set the container height to match the placeholder height
-    parentElement.style.minHeight = `${placeholderHeight}px`;
-    
-    typedElement.textContent = '';
+    typedElement.textContent = ''; // Clear immediately to prevent flash
     
     let index = 0;
+    let isComplete = false;
+    
+    // Function to get natural typing delay based on character
+    function getTypingDelay(char, previousChar) {
+        const baseSpeed = config.animations.typingSpeed;
+        const variation = config.animations.typingVariation;
+        
+        // Add natural variation
+        let delay = baseSpeed + Math.random() * variation - variation / 2;
+        
+        // Adjust for different characters
+        if (char === ' ') {
+            delay *= 0.5; // Spaces are faster
+        } else if (char === ',' || char === '.') {
+            delay *= 1.5; // Punctuation gets a pause
+        } else if (previousChar === ' ') {
+            delay *= 1.2; // Slightly slower after spaces
+        }
+        
+        return Math.max(delay, 20); // Minimum 20ms delay
+    }
     
     function typeNextCharacter() {
-        if (index < text.length) {
-            typedElement.textContent += text.charAt(index);
-            index++;
-            setTimeout(typeNextCharacter, config.animations.typingSpeed);
-        } else {
-            // Animation complete - clean up and restore normal layout
-            placeholder.remove();
-            typedElement.style.position = 'static';
-            parentElement.style.minHeight = 'auto';
+        if (index < text.length && !isComplete) {
+            const currentChar = text.charAt(index);
+            const previousChar = index > 0 ? text.charAt(index - 1) : '';
+            
+            // Use requestAnimationFrame for smooth updates
+            requestAnimationFrame(() => {
+                typedElement.textContent += currentChar;
+                index++;
+                
+                if (index < text.length) {
+                    const delay = getTypingDelay(currentChar, previousChar);
+                    setTimeout(typeNextCharacter, delay);
+                } else {
+                    isComplete = true;
+                }
+            });
         }
     }
     
-    // Start typing after a delay
-    setTimeout(typeNextCharacter, 1000);
+    // Start typing after a brief delay
+    setTimeout(typeNextCharacter, 800);
 }
 
 // ===========================

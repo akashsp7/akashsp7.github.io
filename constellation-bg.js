@@ -16,30 +16,69 @@ class ConstellationBackground {
         this.lastCanvasWidth = 0;
         this.lastCanvasHeight = 0;
         this.resizeTimeout = null;
+        this.lastBlinkValues = new Map();
+        // Mobile detection
+        this.isMobile = this.detectMobile();
         
-        // Configuration
-        this.config = {
-            starCount: 300, // Increased for more scattered effect
+        // PC Configuration (your perfect settings)
+        const pcConfig = {
+            starCount: 300,
             starSize: { min: 0.5, max: 2.5 },
             starOpacity: { min: 0.1, max: 0.8 },
             twinkleSpeed: 0.2,
-            constellationOpacity: 0.25, // Increased for brighter lines
-            connectionDistance: 75, // Reduced to have fewer connections
+            constellationOpacity: 0.25,
+            connectionDistance: 75,
             mouseMagnification: 40,
-            blinkIntensity: 0, // Dramatically increased for obvious blinking
-            blinkSpeed: 1, // Much faster blinking for obvious effect
-            sideWeight: 0.7, // How much to bias towards left/right sides
-            connectionProbability: 0.25, // New: Reduced from 60% to 30% for fewer lines
+            blinkIntensity: 0,
+            blinkSpeed: 1,
+            sideWeight: 0.7,
+            connectionProbability: 0.25,
             colors: {
                 stars: ['#00d4ff', '#6366f1', '#8b5cf6', '#00ff88', '#ffffff'],
                 constellations: '#00d4ff'
             }
         };
 
+        // Mobile Configuration (optimized for performance)
+        const mobileConfig = {
+            starCount: 150, // 50% fewer stars
+            starSize: { min: 0.4, max: 2.0 }, // Slightly smaller
+            starOpacity: { min: 0.1, max: 0.7 }, // Slightly dimmer
+            twinkleSpeed: 0.1, // Slower animations
+            constellationOpacity: 0.2, // Dimmer lines
+            connectionDistance: 60, // Shorter connections
+            mouseMagnification: 30, // Reduced interaction range
+            blinkIntensity: 0, // Disable complex blinking
+            blinkSpeed: 0, // Disable blinking
+            sideWeight: 0.7, // Keep same distribution
+            connectionProbability: 0.15, // Fewer connections (60% of PC)
+            colors: {
+                stars: ['#00d4ff', '#6366f1', '#8b5cf6', '#00ff88', '#ffffff'],
+                constellations: '#00d4ff'
+            }
+        };
+
+        // Use appropriate configuration
+        this.config = this.isMobile ? mobileConfig : pcConfig;
+
         this.init();
     }
 
+    // Mobile detection method
+    detectMobile() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const mobileKeywords = ['mobile', 'android', 'iphone', 'ipad', 'ipod'];
+        const isMobileUA = mobileKeywords.some(keyword => userAgent.includes(keyword));
+        const isSmallScreen = window.innerWidth <= 768;
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
+        return isMobileUA || (isSmallScreen && isTouchDevice);
+    }
+
     init() {
+        console.log(`🌟 Constellation: ${this.isMobile ? 'Mobile' : 'Desktop'} mode detected`);
+        console.log(`📊 Config: ${this.config.starCount} stars, ${this.config.connectionProbability} connection probability`);
+        
         this.createCanvas();
         this.generateStars();
         this.generateConstellations();
@@ -134,15 +173,11 @@ class ConstellationBackground {
                 pulseSpeed: this.seededRandom() * 0.02 + 0.004,
                 pulsePhase: this.seededRandom() * Math.PI * 2,
                 pulseAmplitude: this.seededRandom() * 0.7 + 0.5,
-                // New: Enhanced blinking properties - much more dramatic
-                blinkSpeed: 0.7, // Much faster and more varied
-                blinkPhase: (this.seededRandom() * Math.PI) + 4.3,
-                blinkAmplitude: 0.8, // Much more dramatic blinking
-                blinkOffset: this.seededRandom() * Math.PI * 2 // Unique phase offset for each constellation
-                // blinkSpeed: 0, // Much faster and more varied
-                // blinkPhase: 0,
-                // blinkAmplitude: 0, // Much more dramatic blinking
-                // blinkOffset: 0 // Unique phase offset for each constellation
+                // IMPROVED BLINKING: Better distributed phases to prevent synchronization
+                blinkSpeed: this.isMobile ? 0 : (0.3 + this.seededRandom() * 0.6), // Vary speed: 0.3-0.9
+                blinkPhase: this.isMobile ? 0 : (this.seededRandom() * Math.PI * 2), // Full range distribution
+                blinkAmplitude: this.isMobile ? 0 : (0.4 + this.seededRandom() * 0.4), // Vary amplitude: 0.4-0.8
+                blinkOffset: this.seededRandom() * Math.PI * 2
             };
 
             // Find nearby stars to form constellation - made more scattered
@@ -162,14 +197,10 @@ class ConstellationBackground {
                             constellation.connections.push({
                                 from: constellation.stars[k],
                                 to: constellation.stars[constellation.stars.length - 1],
-                                // New: Individual connection blinking properties - much more dramatic
-                                // blinkSpeed: this.seededRandom() * 1.5 + 2,
-                                // blinkPhase: this.seededRandom() * Math.PI * 2,
-                                // blinkAmplitude: this.seededRandom() * 1.2 + 0.5
-                                blinkSpeed: 0.9, // Smaller = slower. Try between 0.001 and 0.005
-                                blinkPhase: (this.seededRandom() * Math.PI) + 4.3 , // Still good to randomize so stars don’t sync
-                                blinkAmplitude: 0.8 // Lower amplitude = more subtle. Try between 0.2 and 0.4
-
+                                // IMPROVED CONNECTION BLINKING: More varied timing
+                                blinkSpeed: this.isMobile ? 0 : (0.4 + this.seededRandom() * 0.8), // Vary speed: 0.4-1.2
+                                blinkPhase: this.isMobile ? 0 : (this.seededRandom() * Math.PI * 2), // Full range
+                                blinkAmplitude: this.isMobile ? 0 : (0.3 + this.seededRandom() * 0.5) // Vary amplitude: 0.3-0.8
                             });
                         }
                     }
@@ -207,6 +238,45 @@ class ConstellationBackground {
             return;
         }
         
+        // Re-detect mobile state (useful for device rotation)
+        const wasMobile = this.isMobile;
+        this.isMobile = this.detectMobile();
+        
+        // If device type changed, update configuration
+        if (wasMobile !== this.isMobile) {
+            console.log(`🔄 Device type changed: ${this.isMobile ? 'Mobile' : 'Desktop'} mode`);
+            
+            // Update config based on new device type
+            const pcConfig = {
+                starCount: 300,
+                connectionDistance: 75,
+                connectionProbability: 0.25,
+                constellationOpacity: 0.25,
+                blinkIntensity: 0,
+                blinkSpeed: 1,
+                twinkleSpeed: 0.2,
+                // ... other PC settings
+            };
+
+            const mobileConfig = {
+                starCount: 150,
+                connectionDistance: 60,
+                connectionProbability: 0.15,
+                constellationOpacity: 0.2,
+                blinkIntensity: 0,
+                blinkSpeed: 0,
+                twinkleSpeed: 0.1,
+                // ... other mobile settings
+            };
+
+            // Update only the performance-critical properties
+            this.config.starCount = this.isMobile ? mobileConfig.starCount : pcConfig.starCount;
+            this.config.connectionDistance = this.isMobile ? mobileConfig.connectionDistance : pcConfig.connectionDistance;
+            this.config.connectionProbability = this.isMobile ? mobileConfig.connectionProbability : pcConfig.connectionProbability;
+            this.config.constellationOpacity = this.isMobile ? mobileConfig.constellationOpacity : pcConfig.constellationOpacity;
+            this.config.twinkleSpeed = this.isMobile ? mobileConfig.twinkleSpeed : pcConfig.twinkleSpeed;
+        }
+        
         this.lastCanvasWidth = newWidth;
         this.lastCanvasHeight = newHeight;
         
@@ -232,11 +302,35 @@ class ConstellationBackground {
             }, 100); // 100ms debounce
         });
         
-        // Track mouse movement for subtle interactive effect
-        document.addEventListener('mousemove', (e) => {
-            this.mouseX = e.clientX;
-            this.mouseY = e.clientY;
-        });
+        // Enhanced mouse/touch tracking based on device
+        if (this.isMobile) {
+            // Touch events for mobile devices
+            document.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 0) {
+                    this.mouseX = e.touches[0].clientX;
+                    this.mouseY = e.touches[0].clientY;
+                }
+            }, { passive: true });
+            
+            document.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    this.mouseX = e.touches[0].clientX;
+                    this.mouseY = e.touches[0].clientY;
+                }
+            }, { passive: true });
+            
+            document.addEventListener('touchend', () => {
+                // Reset touch position when touch ends
+                this.mouseX = 0;
+                this.mouseY = 0;
+            }, { passive: true });
+        } else {
+            // Mouse events for desktop
+            document.addEventListener('mousemove', (e) => {
+                this.mouseX = e.clientX;
+                this.mouseY = e.clientY;
+            });
+        }
     }
 
     animate() {
@@ -260,32 +354,47 @@ class ConstellationBackground {
             // Calculate twinkling effect
             const twinkle = Math.sin(time * star.twinkleSpeed + star.twinklePhase) * 0.3 + 0.7;
             
-            // Individual star blinking effect
-            const starBlink = Math.sin(time * star.blinkSpeed + star.blinkPhase) * star.blinkAmplitude;
-            const blinkEffect = Math.max(0.2, (starBlink + 1.0) * 0.5);
+            // Individual star blinking effect (original logic for desktop, simplified for mobile)
+            let blinkEffect;
+            if (this.isMobile) {
+                blinkEffect = 1.0; // No blinking on mobile
+            } else {
+                // Original desktop blinking logic
+                const starBlink = Math.sin(time * star.blinkSpeed + star.blinkPhase) * star.blinkAmplitude;
+                blinkEffect = Math.max(0.2, (starBlink + 1.0) * 0.5);
+            }
             
-            // Add regional wave effects for stars too
-            const regionalWave1 = Math.sin(time * 0.007 + star.x * 0.003) * 0.4;
-            const regionalWave2 = Math.cos(time * 0.005 + star.y * 0.004) * 0.3;
-            const regionalBonus = (regionalWave1 + regionalWave2) * 0.6 + 1.0;
+            // Regional wave effects (original logic for desktop, simplified for mobile)
+            let regionalBonus;
+            if (this.isMobile) {
+                regionalBonus = 1.0; // No regional effects on mobile
+            } else {
+                // Original desktop regional logic
+                const regionalWave1 = Math.sin(time * 0.007 + star.x * 0.003) * 0.4;
+                const regionalWave2 = Math.cos(time * 0.005 + star.y * 0.004) * 0.3;
+                regionalBonus = (regionalWave1 + regionalWave2) * 0.6 + 1.0;
+            }
             
-            // Add constellation influence for stars that are part of constellations
+            // Constellation influence (original logic for desktop, simplified for mobile)
             let constellationBonus = 0;
-            this.constellations.forEach(constellation => {
-                if (constellation.stars.includes(index)) {
-                    const centerX = constellation.stars.reduce((sum, starIndex) => sum + this.stars[starIndex].x, 0) / constellation.stars.length;
-                    const centerY = constellation.stars.reduce((sum, starIndex) => sum + this.stars[starIndex].y, 0) / constellation.stars.length;
-                    const spatialWave = Math.sin(time * 0.008 + centerX * 0.004) * 0.4;
-                    const constellationPulse = Math.sin(time * constellation.pulseSpeed + constellation.pulsePhase) * 0.5 + 0.7;
-                    const constellationBlink = Math.sin(time * constellation.blinkSpeed + constellation.blinkPhase) * constellation.blinkAmplitude;
-                    constellationBonus = Math.max(constellationBonus, ((constellationPulse + constellationBlink) * 0.5 + spatialWave) * 0.6);
-                }
-            });
+            if (!this.isMobile) {
+                // Original desktop constellation influence logic
+                this.constellations.forEach(constellation => {
+                    if (constellation.stars.includes(index)) {
+                        const centerX = constellation.stars.reduce((sum, starIndex) => sum + this.stars[starIndex].x, 0) / constellation.stars.length;
+                        const centerY = constellation.stars.reduce((sum, starIndex) => sum + this.stars[starIndex].y, 0) / constellation.stars.length;
+                        const spatialWave = Math.sin(time * 0.008 + centerX * 0.004) * 0.4;
+                        const constellationPulse = Math.sin(time * constellation.pulseSpeed + constellation.pulsePhase) * 0.5 + 0.7;
+                        const constellationBlink = Math.sin(time * constellation.blinkSpeed + constellation.blinkPhase) * constellation.blinkAmplitude;
+                        constellationBonus = Math.max(constellationBonus, ((constellationPulse + constellationBlink) * 0.5 + spatialWave) * 0.6);
+                    }
+                });
+            }
             
             const baseOpacity = star.opacity * twinkle * blinkEffect * regionalBonus;
             const opacity = baseOpacity + constellationBonus;
             
-            // Mouse proximity effect (very subtle)
+            // Mouse proximity effect (original for desktop, reduced for mobile)
             const mouseDistance = Math.sqrt(
                 Math.pow(star.x - this.mouseX, 2) + Math.pow(star.y - this.mouseY, 2)
             );
@@ -297,15 +406,19 @@ class ConstellationBackground {
             this.ctx.save();
             this.ctx.globalAlpha = Math.min(1, enhancedOpacity);
             this.ctx.fillStyle = star.color;
-            this.ctx.shadowBlur = enhancedSize * 2 * blinkEffect;
-            this.ctx.shadowColor = star.color;
+            
+            // Shadow effects (original for desktop, disabled for mobile)
+            if (!this.isMobile) {
+                this.ctx.shadowBlur = enhancedSize * 2 * blinkEffect;
+                this.ctx.shadowColor = star.color;
+            }
             
             this.ctx.beginPath();
             this.ctx.arc(star.x, star.y, enhancedSize, 0, Math.PI * 2);
             this.ctx.fill();
             
-            // Add subtle cross-shaped glow for brighter stars
-            if (enhancedOpacity > 0.6) {
+            // Cross-shaped glow for brighter stars (desktop only)
+            if (!this.isMobile && enhancedOpacity > 0.6) {
                 this.ctx.globalAlpha = enhancedOpacity * 0.3 * blinkEffect;
                 this.ctx.strokeStyle = star.color;
                 this.ctx.lineWidth = 0.5;
@@ -323,40 +436,84 @@ class ConstellationBackground {
 
     drawConstellations(time) {
         this.constellations.forEach(constellation => {
-            // DRAMATIC BLINKING EFFECT - much more obvious
-            const mainBlink = Math.sin(time * constellation.blinkSpeed + constellation.blinkPhase);
-            const blinkEffect = Math.abs(mainBlink) * constellation.blinkAmplitude; // Use abs for more dramatic on/off effect
+            let blinkEffect = 1.0;
+            let baseOpacity = 1.0;
             
-            // Base opacity that varies dramatically from 0.2 to 1.0 (brighter minimum)
-            const baseOpacity = 0.2 + (blinkEffect * 0.8);
+            if (this.isMobile) {
+                // Simple static opacity for mobile (no blinking)
+                baseOpacity = 0.8;
+                blinkEffect = 1.0;
+            } else {
+                // SMOOTH DESKTOP BLINKING - Remove Math.abs() for smoother transitions
+                const mainBlink = Math.sin(time * constellation.blinkSpeed + constellation.blinkPhase);
+                
+                // Smooth curve instead of sharp Math.abs() transitions
+                blinkEffect = (mainBlink + 1.0) * 0.5; // Maps -1,1 to 0,1 smoothly
+                
+                // Apply amplitude with smooth curve
+                blinkEffect = Math.pow(blinkEffect, 1.5) * constellation.blinkAmplitude; // Slight curve for more organic feel
+                const smoothingFactor = 0.1; // Adjust for more/less smoothing
+                const constellationId = constellation.stars.join('-');
+                const lastBlink = this.lastBlinkValues.get(constellationId) || blinkEffect;
+                blinkEffect = lastBlink + (blinkEffect - lastBlink) * smoothingFactor;
+                this.lastBlinkValues.set(constellationId, blinkEffect);
+                                // Smooth opacity range without sharp cutoffs
+                baseOpacity = 0.5 + (blinkEffect * 0.7); // Smoother range: 0.3 to 1.0
+            }
+            
             const opacity = this.config.constellationOpacity * constellation.brightness * baseOpacity;
             
             this.ctx.save();
-            this.ctx.globalAlpha = Math.max(0.1, Math.min(1, opacity));
+            this.ctx.globalAlpha = Math.max(0.05, Math.min(1, opacity)); // Lower minimum for smoother fades
             this.ctx.strokeStyle = this.config.colors.constellations;
             
-            // Thinner line width that varies less dramatically
-            this.ctx.lineWidth = 0.3 + (blinkEffect * 0.8); // Much thinner range (0.3 to 1.1)
-            this.ctx.shadowBlur = blinkEffect * 6; // Reduced glow for cleaner look
-            this.ctx.shadowColor = this.config.colors.constellations;
+            // Smooth line width transitions
+            if (this.isMobile) {
+                this.ctx.lineWidth = 0.4;
+            } else {
+                // Smoother line width curve
+                const smoothWidth = 0.2 + (blinkEffect * 0.6); // More subtle width variation
+                this.ctx.lineWidth = smoothWidth;
+            }
             
-            // Draw connections with individual dramatic blinking
-            constellation.connections.forEach(connection => {
+            // Shadow effects (original for desktop, disabled for mobile)
+            if (!this.isMobile) {
+                this.ctx.shadowBlur = Math.max(0.5, blinkEffect * 4); // Prevent zero shadow blur
+                this.ctx.shadowColor = this.config.colors.constellations;
+            }
+            
+            // Draw connections with STAGGERED TIMING to prevent synchronization
+            constellation.connections.forEach((connection, connectionIndex) => {
                 const fromStar = this.stars[connection.from];
                 const toStar = this.stars[connection.to];
                 
                 if (fromStar && toStar) {
-                    // Individual connection blinking - very dramatic
-                    const connectionBlink = Math.sin(time * connection.blinkSpeed + connection.blinkPhase);
-                    const connectionEffect = Math.abs(connectionBlink) * connection.blinkAmplitude;
-                    
-                    // Combined effect creates very obvious but cleaner blinking
-                    const finalOpacity = Math.max(0.1, (blinkEffect + connectionEffect) * 0.6); // Brighter overall
-                    
-                    // Set opacity for this specific line
-                    this.ctx.globalAlpha = finalOpacity;
-                    this.ctx.lineWidth = 0.3 + (connectionEffect * 0.7); // Thinner lines
-                    this.ctx.shadowBlur = connectionEffect * 4; // Reduced glow
+                    if (this.isMobile) {
+                        // Simple static rendering for mobile
+                        this.ctx.globalAlpha = opacity;
+                    } else {
+                        // SMOOTH CONNECTION BLINKING with staggered timing
+                        const timeOffset = connectionIndex * 0.5; // Stagger connections to avoid sync
+                        const connectionBlink = Math.sin(time * connection.blinkSpeed + connection.blinkPhase + timeOffset);
+                        
+                        // Smooth connection effect (no Math.abs!)
+                        const connectionEffect = (connectionBlink + 1.0) * 0.5; // Smooth 0-1 range
+                        const smoothConnectionEffect = Math.pow(connectionEffect, 1.2) * connection.blinkAmplitude;
+                        
+                        // Combine effects smoothly
+                        const combinedEffect = (blinkEffect * 0.6) + (smoothConnectionEffect * 0.4);
+                        const finalOpacity = Math.max(0.05, combinedEffect * 0.8); // Smoother minimum
+                        
+                        this.ctx.globalAlpha = finalOpacity;
+                        
+                        // Smooth line width for this connection
+                        const connectionWidth = 0.2 + (smoothConnectionEffect * 0.5);
+                        this.ctx.lineWidth = connectionWidth;
+                        
+                        if (!this.isMobile) {
+                            this.ctx.shadowBlur = Math.max(0.3, smoothConnectionEffect * 3);
+                        }
+                    }
                     
                     this.ctx.beginPath();
                     this.ctx.moveTo(fromStar.x, fromStar.y);

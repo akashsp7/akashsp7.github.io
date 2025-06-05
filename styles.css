@@ -624,7 +624,7 @@ body {
     align-items: center;
     height: 100%;
     width: fit-content;
-    animation: skillsFlow 10s linear infinite;
+    animation: skillsFlow 100s linear infinite;
     gap: 30px;
     padding: 0 15px;
     will-change: transform;
@@ -711,7 +711,7 @@ body {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-50% - 15px));
+        transform: translateX(-50%);
     }
 }
 
@@ -1729,7 +1729,7 @@ body {
     }
     
     .skills-flow-track {
-        animation: skillsFlow 8s linear infinite;
+        animation: skillsFlow 75s linear infinite;
         gap: 25px;
     }
     
@@ -1850,7 +1850,7 @@ body {
     }
     
     .skills-flow-track {
-        animation: skillsFlow 7s linear infinite;
+        animation: skillsFlow 60s linear infinite;
         gap: 20px;
     }
     

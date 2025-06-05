@@ -627,6 +627,7 @@ body {
     animation: skillsFlow 10s linear infinite;
     gap: 30px;
     padding: 0 15px;
+    will-change: transform;
 }
 
 .skill-icon {
@@ -710,7 +711,7 @@ body {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-45%);
+        transform: translateX(calc(-50% - 15px));
     }
 }
 
@@ -1723,11 +1724,19 @@ body {
         max-width: 500px;
         height: 70px;
         margin: 25px auto 35px auto;
+        display: flex !important;
+        overflow: hidden !important;
+    }
+    
+    .skills-flow-track {
+        animation: skillsFlow 8s linear infinite;
+        gap: 25px;
     }
     
     .skill-icon {
         min-width: 60px;
         height: 50px;
+        flex-shrink: 0;
     }
     
     .skill-icon i {
@@ -1836,12 +1845,19 @@ body {
         max-width: 400px;
         height: 60px;
         margin: 20px auto 30px auto;
+        display: flex !important;
+        overflow: hidden !important;
+    }
+    
+    .skills-flow-track {
+        animation: skillsFlow 7s linear infinite;
+        gap: 20px;
     }
     
     .skill-icon {
         min-width: 50px;
         height: 40px;
-        gap: 20px;
+        flex-shrink: 0;
     }
     
     .skill-icon i {
@@ -1851,10 +1867,6 @@ body {
     
     .skill-icon span {
         font-size: 8px;
-    }
-    
-    .skills-flow-track {
-        gap: 20px;
     }
     
     .btn-primary,
